@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+scrapy = "==2.6.3"
+lxml = "==4.9.2"
+xmltodict = "==0.13.0"
+pyyaml = "==6.0"
+iteration-utilities = "==0.11.0"
+setuptools = "==59.5.0"
+charset-normalizer = "==3.0.1"
+cryptography = "==38.0.4"
+pycountry = "==22.3.5"
+openpyxl = "==3.1.2"
+beautifulsoup4 = "==4.12.3"
+
+[dev-packages]
+pytest = "7.4.2"
+
+[requires]
+python_version = "3.10"
