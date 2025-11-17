@@ -6,6 +6,8 @@ import logging
 from scrapy.exporters import JsonLinesItemExporter, JsonItemExporter
 from scrapy.utils.python import to_bytes
 from locations import categories
+from locations.models import ServicesModel
+import json
 
 mapping = (
     ('addr_full', 'addr:full'),
@@ -71,7 +73,15 @@ def convert_attrs(attribute_type, attribute_value):
         else:
             return []
     elif attribute_type == "services":
-        if attribute_value:
+        if type(attribute_value) == ServicesModel:
+            services: dict = json.loads(attribute_value.model_dump_json())
+            if services["FuelTypes"]:
+                return {
+                        "Fuel Types": services["FuelTypes"]
+                    }
+            else:
+                return {}
+        elif attribute_value:
             return attribute_value
         else:
             return {}
