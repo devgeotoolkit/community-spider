@@ -14,7 +14,8 @@ from scrapy import signals
 from scrapy.exceptions import NotConfigured
 from scrapy.http import HtmlResponse
 from selenium.webdriver.support.ui import WebDriverWait
-
+from selenium.webdriver.chrome.service import Service
+from selenium import webdriver
 from .http import SeleniumRequest
 
 class SeleniumMiddleware:
@@ -53,28 +54,17 @@ class SeleniumMiddleware:
         for argument in driver_arguments:
             driver_options.add_argument(argument)
 
-        driver_kwargs = {
-            'executable_path': driver_executable_path,
-            f'{driver_name}_options': driver_options
-        }
-
         # locally installed driver
         if driver_executable_path is not None:
-            driver_kwargs = {
-                'executable_path': driver_executable_path,
-                f'{driver_name}_options': driver_options
-            }
-            self.driver = driver_klass(**driver_kwargs)
+            service = Service(driver_executable_path)
+            self.driver = driver_klass(service=service, options=driver_options)
+            
         # remote driver
         elif command_executor is not None:
-            from selenium import webdriver
             self.driver = webdriver.Remote(command_executor=command_executor,
                                             options=driver_options)
         # webdriver-manager
         else:
-            # selenium4+
-            from selenium import webdriver
-            from selenium.webdriver.chrome.service import Service
             if driver_name and driver_name.lower() == 'chrome':
                 service = Service()
                 self.driver = webdriver.Chrome(service=service, options=driver_options)

@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-scrapy = "==2.6.3"
+scrapy = "==2.8.0"
 lxml = "==4.9.2"
 xmltodict = "==0.13.0"
 pyyaml = "==6.0"
@@ -17,6 +17,7 @@ openpyxl = "==3.1.2"
 beautifulsoup4 = "==4.12.3"
 pydantic = "*"
 selenium = "*"
+twisted = "==22.10.0"
 
 [dev-packages]
 pytest = "7.4.2"

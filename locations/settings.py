@@ -53,8 +53,8 @@ DEFAULT_REQUEST_HEADERS = {
 }
 
 SELENIUM_DRIVER_NAME = 'chrome'
-SELENIUM_COMMAND_EXECUTOR = ''
-SELENIUM_DRIVER_ARGUMENTS = []
+SELENIUM_DRIVER_EXECUTABLE_PATH = 'locations/drivers/chromedriver/chromedriver.exe'
+SELENIUM_DRIVER_ARGUMENTS = ['--headless']
 
 
 # Enable or disable downloader middlewares

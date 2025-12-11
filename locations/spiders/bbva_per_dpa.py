@@ -15,7 +15,6 @@ class bbva_per_dpaSpider(scrapy.Spider):
     count = 0
     download_delay = 5
     name_counts = {}
-
     
     # start_urls = ["https://www.bbva.pe/"]
       
@@ -39,17 +38,16 @@ class bbva_per_dpaSpider(scrapy.Spider):
 
         branch_root = response.xpath('//div[@class="editorialcardgrid__cards"]/div/div/div/div[1]')
         for branch in branch_root:
-            
             name = branch.xpath('.//div[@class="card__body rte"]/text()').get()
             location_name = name.replace('\n','').strip()
 
             # Check for duplicates and append a number if needed
             if location_name in self.name_counts:
-                    self.name_counts[location_name] += 1
-                    unique_name = f"{location_name} {self.name_counts[location_name]}"
+                self.name_counts[location_name] += 1
+                unique_name = f"{location_name} {self.name_counts[location_name]}"
             else:
-                    self.name_counts[location_name] = 1
-                    unique_name = location_name
+                self.name_counts[location_name] = 1
+                unique_name = location_name
 
             finalData = {}
             self.count += 1
